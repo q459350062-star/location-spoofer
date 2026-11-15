@@ -143,6 +143,17 @@ func newProxy(cert *tls.Certificate) *goproxy.ProxyHttpServer {
 				logEvent("CONNECT " + host + " -> MITM")
 				return mitmAction, host
 			}
+			// Diagnostic only: record Apple domains outside the WLOC allowlist.
+			// Do not MITM these hosts; this distinguishes an unlisted endpoint
+			// from system traffic that never reaches the local HTTP proxy.
+			appleHost := host
+			if h2, _, err := net.SplitHostPort(appleHost); err == nil {
+				appleHost = h2
+			}
+			appleHost = strings.ToLower(strings.TrimSuffix(appleHost, "."))
+			if appleHost == "apple.com" || strings.HasSuffix(appleHost, ".apple.com") {
+				logEvent("CONNECT Apple host outside WLOC allowlist observed host=" + appleHost + " -> passthrough")
+			}
 			// MITM baidu.com for WiFi proxy detection
 			h := host
 			if h2, _, err := net.SplitHostPort(host); err == nil {
