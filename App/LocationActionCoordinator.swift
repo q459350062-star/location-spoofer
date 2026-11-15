@@ -138,8 +138,15 @@ final class LocationActionCoordinator: ObservableObject {
     }
 
     private func commit(_ favorite: FavoriteLocation) -> Bool {
-        // 固定使用 WGS-84 坐标
+        // 固定使用 WGS-84 坐标；在写入代理前拒绝非法或非有限坐标。
         let wgs = favorite.coordinatePair.wgs84
+        guard wgs.latitude.isFinite,
+              wgs.longitude.isFinite,
+              (-90.0...90.0).contains(wgs.latitude),
+              (-180.0...180.0).contains(wgs.longitude) else {
+            failApply(LocationActionError.invalidCoordinate)
+            return false
+        }
 
         let value = WlocSettings(
             longitude: wgs.longitude,
@@ -199,5 +206,17 @@ final class LocationActionCoordinator: ObservableObject {
             "apply失败",
             error: error
         )
+    }
+}
+
+
+private enum LocationActionError: LocalizedError {
+    case invalidCoordinate
+
+    var errorDescription: String? {
+        switch self {
+        case .invalidCoordinate:
+            return "坐标无效：纬度必须在 -90 至 90、经度必须在 -180 至 180 之间"
+        }
     }
 }
