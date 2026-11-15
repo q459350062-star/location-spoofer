@@ -6,7 +6,7 @@ import vm from "node:vm";
 
 const files = new Map([
   [new URL("../dist/v1/wloc.js", import.meta.url), "c6de58acd18538589657de890d92a1b9a2cea721806801d3c807075b089719f1"],
-  [new URL("../dist/v1/wloc-settings.js", import.meta.url), "8148b32fee0477c0ede0a8d4786beb6ab5c40910209144285f1e08b480a72dff"],
+  [new URL("../dist/v1/wloc-settings.js", import.meta.url), "6ada4c9a44ac5321073fe923ff89ecd7f212c1290126a368cc1c5d9723e6cc8e"],
   [new URL("../LICENSE", import.meta.url), "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"]
 ]);
 
