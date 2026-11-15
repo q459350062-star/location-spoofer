@@ -262,6 +262,23 @@ enum CoordinateConverter {
         return change
     }
 
+    /// MapKit owns the underlying network request, so record only safe failure
+    /// metadata (domain/code/host) and nested errors; never log query coordinates or full URLs.
+    private static func mapKitProbeErrorDescription(_ error: NSError, depth: Int = 0) -> String {
+        let failingURL = (error.userInfo[NSURLErrorFailingURLStringErrorKey] as? String)
+            .flatMap(URL.init(string:))
+            ?? (error.userInfo[NSURLErrorFailingURLKey] as? URL)
+        let host = failingURL?.host
+        var parts = ["\(error.domain)(\(error.code)): \(error.localizedDescription)"]
+        if let host, !host.isEmpty {
+            parts.append("host=\(host)")
+        }
+        if depth < 3, let underlying = error.userInfo[NSUnderlyingErrorKey] as? NSError {
+            parts.append("underlying{\(mapKitProbeErrorDescription(underlying, depth: depth + 1))}")
+        }
+        return parts.joined(separator: " ")
+    }
+
     private static func fixedAnchorCoordinateSystemProbe() async -> MapCoordinateSystemProbeResult {
         let request = MKLocalSearch.Request()
         request.naturalLanguageQuery = "22.283819, 114.158439"
@@ -280,7 +297,7 @@ enum CoordinateConverter {
                     if let error {
                         let nsError = error as NSError
                         resolver.resolve(.unavailable(
-                            reason: "\(nsError.domain)(\(nsError.code)): \(nsError.localizedDescription)"
+                            reason: mapKitProbeErrorDescription(nsError)
                         ))
                         return
                     }
