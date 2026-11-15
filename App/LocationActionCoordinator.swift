@@ -4,6 +4,7 @@ import Foundation
 protocol LocationActionProxying: AnyObject {
     var isRunning: Bool { get }
     func start() async throws
+    func stop()
     func setCoords(lat: Double, lon: Double, enabled: Bool, accuracy: Int) -> UInt64
 }
 
@@ -72,10 +73,12 @@ final class LocationActionCoordinator: ObservableObject {
     }
 
     func clear() {
-        guard !state.isBusy else { return }
-        _ = proxy.setCoords(lat: 0, lon: 0, enabled: false, accuracy: 25)
-        settings.clear()
-        state = .idle
+    guard !state.isBusy else { return }
+    _ = proxy.setCoords(lat: 0, lon: 0, enabled: false, accuracy: 25)
+    settings.clear()
+    proxy.stop()
+    RuntimeLogger.info("APP", "Location", "虚拟定位已关闭，本地代理已停止")
+    state = .idle
         virtualLocationEnabled = false
         message = "已恢复真实定位"
     }
