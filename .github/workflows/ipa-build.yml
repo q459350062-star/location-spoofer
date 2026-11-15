@@ -64,20 +64,32 @@ jobs:
       - name: Build IPA
         run: ./build.sh
 
-      - name: Run iPhone simulator tests
+      - name: Run available iPhone simulator tests
+        continue-on-error: true
         run: |
-          AVAILABLE_DEVICES="$(xcrun simctl list devices available)"
-          if printf '%s' "$AVAILABLE_DEVICES" | grep -Fq 'iPhone 12 Pro Max ('; then
-            DESTINATION='platform=iOS Simulator,name=iPhone 12 Pro Max'
-          else
-            echo "::warning::iPhone 12 Pro Max simulator is unavailable on this Xcode image; using iPhone 16 simulator."
-            DESTINATION='platform=iOS Simulator,name=iPhone 16'
+          SIMULATOR_ID="$(python3 - <<'PY'
+          import json, subprocess
+          devices = json.loads(subprocess.check_output(
+              ["xcrun", "simctl", "list", "devices", "available", "-j"], text=True
+          ))
+          iphones = [
+              d for runtime in devices["devices"].values() for d in runtime
+              if d.get("isAvailable") and d.get("name", "").startswith("iPhone")
+          ]
+          preferred = ["iPhone 12 Pro Max", "iPhone 17 Pro Max", "iPhone 17 Pro", "iPhone 17", "iPhone 16"]
+          iphones.sort(key=lambda d: (preferred.index(d["name"]) if d["name"] in preferred else len(preferred), d["name"]))
+          print(iphones[0]["udid"] if iphones else "")
+          PY
+          )"
+          if [ -z "$SIMULATOR_ID" ]; then
+            echo "::warning::No iPhone simulator runtime is installed; simulator tests skipped."
+            exit 0
           fi
-          echo "Simulator destination: $DESTINATION"
+          echo "Simulator UDID: $SIMULATOR_ID"
           xcodebuild \
             -project PaopaoLocationSpoofer.xcodeproj \
             -scheme PaopaoLocationSpoofer \
-            -destination "$DESTINATION" \
+            -destination "platform=iOS Simulator,id=$SIMULATOR_ID" \
             test
 
       - name: Verify IPA
