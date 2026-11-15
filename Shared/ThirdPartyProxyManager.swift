@@ -206,7 +206,7 @@ final class ThirdPartyProxyManager: ObservableObject {
 
 enum ThirdPartyProxyClient: String, CaseIterable, Identifiable {
     /// Bump when a hosted module or script changes to invalidate proxy-client caches.
-    static let moduleSubscriptionVersion = "1.0.8"
+    static let moduleSubscriptionVersion = "1.0.9"
 
     case shadowrocket
     case surge
@@ -248,8 +248,8 @@ enum ThirdPartyProxyClient: String, CaseIterable, Identifiable {
             ? "Resources/ThirdPartyProxyModules"
             : "ThirdParty/WlocScripts/modules/direct"
         let prefix = ThirdPartyModuleSourceStore.shared.useMirror
-            ? "https://gh-proxy.org/https://raw.githubusercontent.com/xweiba/location-spoofer/main/"
-            : "https://raw.githubusercontent.com/xweiba/location-spoofer/main/"
+            ? "https://gh-proxy.org/https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/"
+            : "https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/"
         let base = "\(prefix)\(directory)/\(moduleFileName)"
         return URL(string: "\(base)?v=\(Self.moduleSubscriptionVersion)")!
     }
