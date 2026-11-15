@@ -12,6 +12,7 @@ on:
       - 'Core/**'
       - 'Shared/**'
       - 'Resources/**'
+      - 'ThirdParty/WlocScripts/**'
       - 'Config/**'
       - 'Scripts/**'
       - 'Tests/**'
