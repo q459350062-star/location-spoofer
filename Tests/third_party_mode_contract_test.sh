@@ -37,7 +37,7 @@ grep -Fq '保存：GET ?lon=<经度>&lat=<纬度>&acc=<精度>' "$SETUP" \
 grep -Fq '清除：GET ?action=clear' "$SETUP" \
   || fail "client integration guidance must document the clear action"
 
-grep -q 'raw.githubusercontent.com/xweiba/location-spoofer/main' "$MANAGER" \
+grep -q 'raw.githubusercontent.com/q459350062-star/location-spoofer/main' "$MANAGER" \
   || fail "third-party subscription must point at project-owned modules"
 ! grep -q 'raw.githubusercontent.com/Yu9191/wloc' "$MANAGER" \
   || fail "third-party subscription must not depend on the removed upstream repository"
