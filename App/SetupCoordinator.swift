@@ -68,7 +68,7 @@ func prepareLocalServices() async -> Bool {
         case .success:
             trustState = .trusted
             needsSetup = false
-            message = AppLocalization.string("✓ 定位环境正常")
+            message = AppLocalization.string("✓ 代理链路就绪；Apple 系统定位修改尚未验证")
         case .certNotTrusted:
             trustState = .unavailable
             setupStep = .cert
@@ -188,7 +188,8 @@ func prepareLocalServices() async -> Bool {
         collectProxyLogs(since: stepBStart, to: log)
 
         log("")
-        log(AppLocalization.string("======== 环境检测通过 ✓ ========"))
+        log(AppLocalization.string("======== 代理链路检测通过 ✓ ========"))
+        log(AppLocalization.string("注意：此测试只验证本地代理、CA 信任和 Wi-Fi 代理链路；不代表 Apple WLOC 请求已经过代理，也不代表系统定位已修改。"))
         return .success
     }
 
