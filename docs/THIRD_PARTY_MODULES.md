@@ -11,13 +11,13 @@ as provenance and is not a runtime dependency.
 - Versioned recovered scripts: `ThirdParty/WlocScripts/dist/v1/`
 - Integrity and runtime tests: `ThirdParty/WlocScripts/test/`
 
-The App appends `?v=1.0.8` to module subscription URLs, and every module uses
+The App appends `?v=1.0.9` to module subscription URLs, and every module uses
 the same cache version for its script URLs:
 
 - default mirror:
-  `https://gh-proxy.org/https://raw.githubusercontent.com/xweiba/location-spoofer/main/Resources/ThirdPartyProxyModules/<file>?v=1.0.8`
+  `https://gh-proxy.org/https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/Resources/ThirdPartyProxyModules/<file>?v=1.0.9`
 - direct:
-  `https://raw.githubusercontent.com/xweiba/location-spoofer/main/ThirdParty/WlocScripts/modules/direct/<file>?v=1.0.8`
+  `https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/ThirdParty/WlocScripts/modules/direct/<file>?v=1.0.9`
 
 | Module file | Client |
 |---|---|
