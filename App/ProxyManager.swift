@@ -12,6 +12,7 @@ final class ProxyManager: ObservableObject {
     private let certificateStore = CertificateAuthorityStore()
     private var proxyHandle: UInt = 0
     private var coordinateRevision: UInt64 = 0
+    private var logFlushTask: Task<Void, Never>?
 
     private init() { RuntimeLogger.info("APP", "Proxy", "初始化") }
 
@@ -49,6 +50,7 @@ final class ProxyManager: ObservableObject {
             BackgroundKeepAlive.shared.start()
             CoreBridge.flushLogs(category: "Proxy")
             RuntimeLogger.info("APP", "Proxy.start", "启动成功")
+            startLogFlush()
         } catch {
             CoreBridge.flushLogs(category: "Proxy")
             RuntimeLogger.error("APP", "Proxy.start", "启动失败", error: error)
@@ -150,6 +152,16 @@ final class ProxyManager: ObservableObject {
         CoreBridge.flushLogs(category: "Proxy")
     }
 
+    private func startLogFlush() {
+    logFlushTask?.cancel()
+    logFlushTask = Task { [weak self] in
+        while !Task.isCancelled {
+            try? await Task.sleep(nanoseconds: 500_000_000)
+            guard let self, self.isRunning else { break }
+            CoreBridge.flushLogs(category: "Proxy")
+        }
+    }
+}
     func prepareCertificateDownloadURL() async -> URL? {
         do {
             if !isRunning { try await start() }
