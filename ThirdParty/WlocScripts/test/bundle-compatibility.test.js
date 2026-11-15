@@ -5,8 +5,8 @@ import { readFile } from "node:fs/promises";
 import vm from "node:vm";
 
 const files = new Map([
-  [new URL("../dist/v1/wloc.js", import.meta.url), "a1b361e60f0b434585260fb59c65d1ddbe3bff89ace3639f592e7d8af432b3c1"],
-  [new URL("../dist/v1/wloc-settings.js", import.meta.url), "cbff047a7f42055615ee19e208ddfc2ec66833e6f2b75555eac84f1c299a66cf"],
+  [new URL("../dist/v1/wloc.js", import.meta.url), "c6de58acd18538589657de890d92a1b9a2cea721806801d3c807075b089719f1"],
+  [new URL("../dist/v1/wloc-settings.js", import.meta.url), "6ada4c9a44ac5321073fe923ff89ecd7f212c1290126a368cc1c5d9723e6cc8e"],
   [new URL("../LICENSE", import.meta.url), "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"]
 ]);
 
@@ -49,4 +49,22 @@ test("settings bundle saves and queries wloc_settings in Shadowrocket", async ()
     { success: queried.success, longitude: queried.longitude, latitude: queried.latitude, accuracy: queried.accuracy },
     { success: true, longitude: 121.1, latitude: 31.2, accuracy: 25 }
   );
+
+  const zeroSaved = run("https://gs-loc.apple.com/wloc-settings/save?lon=0&lat=0&acc=25");
+  assert.equal(zeroSaved.success, true);
+  const zeroQueried = run("https://gs-loc.apple.com/wloc-settings/save?action=query");
+  assert.deepEqual(
+    { success: zeroQueried.success, longitude: zeroQueried.longitude, latitude: zeroQueried.latitude },
+    { success: true, longitude: 0, latitude: 0 }
+  );
+});
+
+test("WLOC runtime accepts zero-valued saved and argument coordinates", async () => {
+  const source = await readFile(new URL("../dist/v1/wloc.js", import.meta.url), "utf8");
+  assert.match(source, /null!=a\.longitude/);
+  assert.match(source, /null!=a\.latitude/);
+  assert.match(source, /void 0!==e\.longitude/);
+  assert.match(source, /void 0!==e\.latitude/);
+  assert.doesNotMatch(source, /a\.longitude&&\(r\.longitude=/);
+  assert.doesNotMatch(source, /a\.latitude&&\(r\.latitude=/);
 });
