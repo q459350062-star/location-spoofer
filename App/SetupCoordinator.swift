@@ -29,18 +29,38 @@ final class SetupCoordinator: ObservableObject {
     /// Local services are prepared before the setup UI so the environment test
     /// can distinguish Wi-Fi proxy configuration from CA trust failures.
     @discardableResult
-    func prepareLocalServices() async -> Bool {
-        do {
-            _ = try certificateStore.ensure()
-            if !proxy.isRunning { try await proxy.start() }
-            message = ""
-            return true
-        } catch {
-            message = AppLocalization.string("本地代理初始化失败：\(error.localizedDescription)")
-            RuntimeLogger.error("APP", "Startup", "本地服务初始化失败", error: error)
-            return false
-        }
+    
+func prepareLocalServices() async -> Bool {
+    do {
+        // 仅准备证书，不自动启动代理
+        _ = try certificateStore.ensure()
+
+        message = ""
+
+        RuntimeLogger.info(
+            "APP",
+            "Startup",
+            "本地证书初始化完成，等待用户开启虚拟定位"
+        )
+
+        return true
+
+    } catch {
+        message = AppLocalization.string(
+            "本地证书初始化失败：\(error.localizedDescription)"
+        )
+
+        RuntimeLogger.error(
+            "APP",
+            "Startup",
+            "本地证书初始化失败",
+            error: error
+        )
+
+        return false
     }
+}
+
 
     func applyVerificationResult(_ result: VerificationResult) {
         lastVerificationResult = result
