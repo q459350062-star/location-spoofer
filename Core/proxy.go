@@ -160,10 +160,12 @@ func newProxy(cert *tls.Certificate) *goproxy.ProxyHttpServer {
 	}
 
 	proxy.OnRequest().DoFunc(func(req *http.Request, ctx *goproxy.ProxyCtx) (*http.Request, *http.Response) {
-		// Do not buffer or log arbitrary global-proxy traffic. Keep requests streaming
-		// and do not persist unrelated request content in diagnostics.
-		return serveLocalRequests(req, ctx)
-	})
+    if isWlocHost(req.Host) {
+        logEvent(fmt.Sprintf("WLOC request observed method=%s host=%s path=%s",
+            req.Method, req.URL.Host, req.URL.Path))
+    }
+    return serveLocalRequests(req, ctx)
+})
 	proxy.OnResponse().DoFunc(patchWlocResponse)
 	return proxy
 }
@@ -223,9 +225,21 @@ func patchWlocResponse(resp *http.Response, ctx *goproxy.ProxyCtx) *http.Respons
 	if resp == nil || resp.Request == nil {
 		return resp
 	}
-	if !isWlocHost(resp.Request.Host) || resp.Request.URL.Path != "/clls/wloc" || resp.Request.Method != http.MethodPost {
-		return resp
-	}
+	if !isWlocHost(resp.Request.Host) {
+    return resp
+}
+
+logEvent(fmt.Sprintf("WLOC response observed method=%s host=%s path=%s status=%d contentLength=%d encoding=%s",
+    resp.Request.Method,
+    resp.Request.URL.Host,
+    resp.Request.URL.Path,
+    resp.StatusCode,
+    resp.ContentLength,
+    resp.Header.Get("Content-Encoding")))
+
+if resp.Request.URL.Path != "/clls/wloc" || resp.Request.Method != http.MethodPost {
+    return resp
+}
 
 	stateMu.Lock()
 	enabled, lat, lon, accuracy, motionEnabled := currentEnabled, currentLat, currentLon, currentAccuracy, currentMotionSimulationEnabled
