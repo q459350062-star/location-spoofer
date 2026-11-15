@@ -29,8 +29,8 @@ http:
 
 script-providers:
   WLOC.Location:
-    url: https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/ThirdParty/WlocScripts/dist/v1/wloc.js?v=1.0.8
+    url: https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/ThirdParty/WlocScripts/dist/v1/wloc.js?v=1.0.9
     interval: 86400
   WLOC.Settings:
-    url: https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/ThirdParty/WlocScripts/dist/v1/wloc-settings.js?v=1.0.8
+    url: https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/ThirdParty/WlocScripts/dist/v1/wloc-settings.js?v=1.0.9
     interval: 86400
