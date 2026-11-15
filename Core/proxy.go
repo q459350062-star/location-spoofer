@@ -46,6 +46,22 @@ func logEvent(msg string) {
 	log.Printf("%s", msg)
 }
 
+// proxyDiagnosticLogger captures only TLS/MITM failures from goproxy.
+// Routine request logs and unrelated browsing destinations are discarded.
+type proxyDiagnosticLogger struct{}
+
+func (proxyDiagnosticLogger) Printf(format string, args ...any) {
+	msg := fmt.Sprintf(format, args...)
+	switch {
+	case strings.Contains(msg, "Cannot handshake client"),
+		strings.Contains(msg, "Cannot read request from mitm'd client"),
+		strings.Contains(msg, "Cannot read response from mitm'd server"),
+		strings.Contains(msg, "HTTP2 connection failed"),
+		strings.Contains(msg, "Illegal URL"):
+		logEvent("goproxy diagnostic: " + msg)
+	}
+}
+
 func drainLogs() string {
 	logMu.Lock()
 	defer logMu.Unlock()
@@ -75,7 +91,8 @@ func isWlocHost(host string) bool {
 
 func newProxy(cert *tls.Certificate) *goproxy.ProxyHttpServer {
 	proxy := goproxy.NewProxyHttpServer()
-	proxy.Verbose = false
+	proxy.Verbose = true
+	proxy.Logger = proxyDiagnosticLogger{}
 
 	// Handle non-proxy requests (e.g. Safari browsing directly to 127.0.0.1:8888)
 	proxy.NonproxyHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
