@@ -71,6 +71,10 @@ private final class FakeLocationActionProxy: LocationActionProxying {
         isRunning = true
     }
 
+    func stop() {
+        isRunning = false
+    }
+
     func setCoords(lat: Double, lon: Double, enabled: Bool, accuracy: Int) -> UInt64 {
         lastCoordinates = Coordinates(latitude: lat, longitude: lon, enabled: enabled, accuracy: accuracy)
         return 1
