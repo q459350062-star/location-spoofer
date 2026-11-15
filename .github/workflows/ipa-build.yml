@@ -64,6 +64,22 @@ jobs:
       - name: Build IPA
         run: ./build.sh
 
+      - name: Run iPhone simulator tests
+        run: |
+          AVAILABLE_DEVICES="$(xcrun simctl list devices available)"
+          if printf '%s' "$AVAILABLE_DEVICES" | grep -Fq 'iPhone 12 Pro Max ('; then
+            DESTINATION='platform=iOS Simulator,name=iPhone 12 Pro Max'
+          else
+            echo "::warning::iPhone 12 Pro Max simulator is unavailable on this Xcode image; using iPhone 16 simulator."
+            DESTINATION='platform=iOS Simulator,name=iPhone 16'
+          fi
+          echo "Simulator destination: $DESTINATION"
+          xcodebuild \
+            -project PaopaoLocationSpoofer.xcodeproj \
+            -scheme PaopaoLocationSpoofer \
+            -destination "$DESTINATION" \
+            test
+
       - name: Verify IPA
         run: |
           test -s dist/PaopaoLocationSpoofer-unsigned.ipa
