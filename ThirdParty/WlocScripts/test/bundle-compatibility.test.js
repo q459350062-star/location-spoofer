@@ -5,8 +5,8 @@ import { readFile } from "node:fs/promises";
 import vm from "node:vm";
 
 const files = new Map([
-  [new URL("../dist/v1/wloc.js", import.meta.url), "10ace17166c4bf341eb15e29bc707ab73044fb4bd880a5733de38d96d57f402b"],
-  [new URL("../dist/v1/wloc-settings.js", import.meta.url), "6688f4883dd9d7243c625f3c92db2a66c26ebba6ecd16fcb830b683afdb3088f"],
+  [new URL("../dist/v1/wloc.js", import.meta.url), "c6de58acd18538589657de890d92a1b9a2cea721806801d3c807075b089719f1"],
+  [new URL("../dist/v1/wloc-settings.js", import.meta.url), "8148b32fee0477c0ede0a8d4786beb6ab5c40910209144285f1e08b480a72dff"],
   [new URL("../LICENSE", import.meta.url), "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"]
 ]);
 
