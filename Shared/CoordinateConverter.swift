@@ -267,7 +267,6 @@ enum CoordinateConverter {
     private static func mapKitProbeErrorDescription(_ error: NSError, depth: Int = 0) -> String {
         let failingURL = (error.userInfo[NSURLErrorFailingURLStringErrorKey] as? String)
             .flatMap(URL.init(string:))
-            ?? (error.userInfo[NSURLErrorFailingURLKey] as? URL)
         let host = failingURL?.host
         var parts = ["\(error.domain)(\(error.code)): \(error.localizedDescription)"]
         if let host, !host.isEmpty {
