@@ -1,3 +1,4 @@
+
 import Foundation
 
 @MainActor
@@ -19,9 +20,17 @@ protocol LocationActionSettingsStoring: AnyObject {
 
 @MainActor
 final class DeviceWlocSettingsStorage: LocationActionSettingsStoring {
-    func load() -> WlocSettings? { WlocSettingsStore.load() }
-    func save(_ settings: WlocSettings) { WlocSettingsStore.save(settings) }
-    func clear() { WlocSettingsStore.clear() }
+    func load() -> WlocSettings? {
+        WlocSettingsStore.load()
+    }
+
+    func save(_ settings: WlocSettings) {
+        WlocSettingsStore.save(settings)
+    }
+
+    func clear() {
+        WlocSettingsStore.clear()
+    }
 }
 
 @MainActor
@@ -39,7 +48,10 @@ final class LocationActionCoordinator: ObservableObject {
         self.virtualLocationEnabled = settings.load()?.enabled == true
     }
 
-    init(proxy: any LocationActionProxying, settings: any LocationActionSettingsStoring) {
+    init(
+        proxy: any LocationActionProxying,
+        settings: any LocationActionSettingsStoring
+    ) {
         self.proxy = proxy
         self.settings = settings
         self.virtualLocationEnabled = settings.load()?.enabled == true
@@ -47,75 +59,127 @@ final class LocationActionCoordinator: ObservableObject {
 
     func apply(_ favorite: FavoriteLocation) async -> Bool {
         guard beginApply() else { return false }
+
+        let wasRunning = proxy.isRunning
+
         do {
-            if !proxy.isRunning { try await proxy.start() }
+            if !wasRunning {
+                try await proxy.start()
+            }
+
             guard !Task.isCancelled else {
+                if !wasRunning {
+                    proxy.stop()
+                }
                 finishCancelledApply()
                 return false
             }
+
             return commit(favorite)
+
         } catch {
+            if !wasRunning {
+                proxy.stop()
+            }
+
             failApply(error)
             return false
         }
     }
 
-    /// Commits a target after SetupCoordinator has completed verification.
-    /// This method is synchronous on MainActor so selection revision validation
-    /// and the final settings/proxy write cannot be interleaved by a newer map event.
+    /// 提交已经完成验证的位置
     func applyVerified(_ favorite: FavoriteLocation) -> Bool {
+        guard beginApply() else { return false }
+
         guard proxy.isRunning else {
             failApply(ProxyError.startFailed)
             return false
         }
-        guard beginApply() else { return false }
+
         return commit(favorite)
     }
 
+    /// 关闭虚拟定位，同时停止本地代理
     func clear() {
-    guard !state.isBusy else { return }
-    _ = proxy.setCoords(lat: 0, lon: 0, enabled: false, accuracy: 25)
-    settings.clear()
-    proxy.stop()
-    RuntimeLogger.info("APP", "Location", "虚拟定位已关闭，本地代理已停止")
-    state = .idle
+        guard !state.isBusy else { return }
+
+        // 先发送关闭定位指令
+        _ = proxy.setCoords(
+            lat: 0,
+            lon: 0,
+            enabled: false,
+            accuracy: 25
+        )
+
+        // 清除持久化配置
+        settings.clear()
+
+        // 停止代理
+        proxy.stop()
+
+        RuntimeLogger.info(
+            "APP",
+            "Location",
+            "虚拟定位已关闭，本地代理已停止"
+        )
+
+        state = .idle
         virtualLocationEnabled = false
         message = "已恢复真实定位"
     }
 
     private func beginApply() -> Bool {
         guard !state.isBusy else { return false }
+
         state = .applyingLocation
         message = "启动代理…"
+
         return true
     }
 
     private func commit(_ favorite: FavoriteLocation) -> Bool {
-        // WLOC 合约固定使用持久化的 WGS-84 值，不依赖当前地图地图坐标标准。
+        // 固定使用 WGS-84 坐标
         let wgs = favorite.coordinatePair.wgs84
+
         let value = WlocSettings(
             longitude: wgs.longitude,
             latitude: wgs.latitude,
             accuracy: favorite.accuracy,
             enabled: true
         )
+
         settings.save(value)
+
         _ = proxy.setCoords(
             lat: wgs.latitude,
             lon: wgs.longitude,
             enabled: true,
             accuracy: favorite.accuracy
         )
-        RuntimeLogger.info("APP", "坐标转换", "设置虚拟定位坐标", details: [
-            "WLOC写入标准": CoordinateConverter.MapCoordinateSystem.wgs84.diagnosticName,
-            "当前地图标准": CoordinateConverter.currentMapCoordinateSystem.diagnosticName,
-            "目标所在区域": CoordinateConverter.usesGCJ02ServiceArea(lat: wgs.latitude, lon: wgs.longitude) ? "国内转换区域" : "国外非转换区域",
-            "取值字段": "coordinatePair.wgs84",
-            "accuracy": String(favorite.accuracy)
-        ])
+
+        RuntimeLogger.info(
+            "APP",
+            "坐标转换",
+            "设置虚拟定位坐标",
+            details: [
+                "WLOC写入标准":
+                    CoordinateConverter.MapCoordinateSystem.wgs84.diagnosticName,
+                "当前地图标准":
+                    CoordinateConverter.currentMapCoordinateSystem.diagnosticName,
+                "目标所在区域":
+                    CoordinateConverter.usesGCJ02ServiceArea(
+                        lat: wgs.latitude,
+                        lon: wgs.longitude
+                    ) ? "国内转换区域" : "国外非转换区域",
+                "取值字段": "coordinatePair.wgs84",
+                "accuracy": String(favorite.accuracy)
+            ]
+        )
+
         state = .idle
         virtualLocationEnabled = true
         message = "虚拟定位已开启"
+
         return true
     }
 
@@ -128,6 +192,12 @@ final class LocationActionCoordinator: ObservableObject {
         virtualLocationEnabled = false
         message = "启动失败"
         state = .failed(error.localizedDescription)
-        RuntimeLogger.error("APP", "Location", "apply失败", error: error)
+
+        RuntimeLogger.error(
+            "APP",
+            "Location",
+            "apply失败",
+            error: error
+        )
     }
 }
