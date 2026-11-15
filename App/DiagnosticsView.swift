@@ -109,7 +109,7 @@ struct RuntimeLogsView: View {
                         let result = await setup.runVerificationTest()
                         testSucceeded = result.isSuccess
                         testResult = result.isSuccess
-                            ? AppLocalization.string("环境检测通过")
+                            ? AppLocalization.string("代理链路检测通过；系统定位修改尚未验证")
                             : AppLocalization.string("环境检测失败: \(result.localizedTitle)")
                         if !result.isSuccess { testResult += AppLocalization.string("，查看下方日志") }
                         testMessage = setup.testLog
@@ -140,7 +140,7 @@ struct RuntimeLogsView: View {
             .disabled(isTesting || actions.state.isBusy)
             (runtimeMode.mode == .thirdParty
                  ? Text("检查第三方模块能否拦截并响应 query 请求；不会写入测试坐标。")
-                 : Text("依次检查：本地代理 → CA 证书信任 → Wi-Fi 代理链路。"))
+                 : Text("检查本地代理、CA 信任和 Wi-Fi 代理链路；不代表 Apple 系统定位已修改。"))
                 .font(.caption).foregroundStyle(.secondary)
             if !testMessage.isEmpty {
                 VStack(alignment: .leading, spacing: 6) {
@@ -188,7 +188,7 @@ struct RuntimeLogsView: View {
             if runtimeMode.mode == .localWiFi {
                 HStack(spacing: 14) {
                     (proxy.isRunning ? Label("代理运行中", systemImage: "play.circle") : Label("代理未运行", systemImage: "stop.circle"))
-                    (setup.canModify ? Label("可修改", systemImage: "checkmark.shield.fill") : Label("不可修改", systemImage: "xmark.shield"))
+                    (setup.canModify ? Label("代理链路就绪", systemImage: "checkmark.shield.fill") : Label("代理链路未就绪", systemImage: "xmark.shield"))
                 }.font(.caption).foregroundStyle(.secondary)
             }
             if !testResult.isEmpty {
