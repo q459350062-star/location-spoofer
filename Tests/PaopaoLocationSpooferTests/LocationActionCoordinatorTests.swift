@@ -39,6 +39,26 @@ final class LocationActionCoordinatorTests: XCTestCase {
         XCTAssertFalse(coordinator.virtualLocationEnabled)
     }
 
+    func testApplyRejectsOutOfRangeCoordinatesAndStopsNewProxy() async {
+        let proxy = FakeLocationActionProxy()
+        let settings = FakeLocationActionSettingsStore()
+        let coordinator = LocationActionCoordinator(proxy: proxy, settings: settings)
+        let invalidFavorite = FavoriteLocation(
+            name: "非法纬度",
+            latitude: 91.0,
+            longitude: 10.0,
+            accuracy: 20
+        )
+
+        let applied = await coordinator.apply(invalidFavorite)
+
+        XCTAssertFalse(applied)
+        XCTAssertFalse(proxy.isRunning)
+        XCTAssertNil(proxy.lastCoordinates)
+        XCTAssertNil(settings.saved)
+        XCTAssertFalse(coordinator.virtualLocationEnabled)
+    }
+
     func testApplyVerifiedRejectsInactiveProxyWithoutWritingCoordinates() {
         let proxy = FakeLocationActionProxy()
         let settings = FakeLocationActionSettingsStore()
