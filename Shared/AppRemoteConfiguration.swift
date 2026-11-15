@@ -109,14 +109,14 @@ final class AppRemoteConfigurationStore: ObservableObject {
 enum AppRemoteConfigurationService {
     static let configurationURLs = [
         URL(
-            string: "https://gh-proxy.org/https://raw.githubusercontent.com/xweiba/location-spoofer/main/version.txt"
+            string: "https://gh-proxy.org/https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/version.txt"
         )!,
         URL(
-            string: "https://raw.githubusercontent.com/xweiba/location-spoofer/main/version.txt"
+            string: "https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/version.txt"
         )!
     ]
     static let releasesURL = URL(
-        string: "https://github.com/xweiba/location-spoofer/releases/latest"
+        string: "https://github.com/q459350062-star/location-spoofer/releases/latest"
     )!
 
     static func fetch() async -> AppRemoteConfiguration? {
@@ -197,7 +197,7 @@ enum AppRemoteConfigurationService {
         case "zh-Hant": suffix = ".zh-Hant"
         default: suffix = ".en"
         }
-        let path = "https://raw.githubusercontent.com/xweiba/location-spoofer/main/docs/releases/v\(version)\(suffix).md"
+        let path = "https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/docs/releases/v\(version)\(suffix).md"
         return [
             URL(string: "https://gh-proxy.org/\(path)")!,
             URL(string: path)!
