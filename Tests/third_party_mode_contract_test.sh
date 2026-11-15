@@ -37,7 +37,7 @@ grep -Fq '保存：GET ?lon=<经度>&lat=<纬度>&acc=<精度>' "$SETUP" \
 grep -Fq '清除：GET ?action=clear' "$SETUP" \
   || fail "client integration guidance must document the clear action"
 
-grep -q 'raw.githubusercontent.com/xweiba/location-spoofer/main' "$MANAGER" \
+grep -q 'raw.githubusercontent.com/q459350062-star/location-spoofer/main' "$MANAGER" \
   || fail "third-party subscription must point at project-owned modules"
 ! grep -q 'raw.githubusercontent.com/Yu9191/wloc' "$MANAGER" \
   || fail "third-party subscription must not depend on the removed upstream repository"
@@ -47,7 +47,7 @@ for file in wloc.module wloc.sgmodule wloc.conf wloc.lpx wloc.stoverride; do
   test -s "$MODULES/$file" || fail "missing project-owned mirrored module: $file"
   test -s "$SCRIPTS/modules/direct/$file" || fail "missing project-owned direct module: $file"
   ! grep 'ThirdParty/WlocScripts/dist/v1/wloc' "$MODULES/$file" "$SCRIPTS/modules/direct/$file" \
-      | grep -Fvq '?v=1.0.8' \
+      | grep -Fvq '?v=1.0.9' \
     || fail "hosted script URLs must carry the current cache version: $file"
 done
 test -s "$SCRIPTS/dist/v1/wloc.js" || fail "missing hosted WLOC response script"

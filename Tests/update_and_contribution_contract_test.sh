@@ -48,7 +48,7 @@ grep -q 'timeoutIntervalForRequest = 1.5' "$CONFIG" \
   || fail "remote configuration requests must use a short timeout"
 grep -q 'timeoutIntervalForResource = 2' "$CONFIG" \
   || fail "remote configuration resource loading must use a short timeout"
-grep -q 'gh-proxy.org/https://raw.githubusercontent.com/xweiba/location-spoofer/main/version.txt' "$CONFIG" \
+grep -q 'gh-proxy.org/https://raw.githubusercontent.com/q459350062-star/location-spoofer/main/version.txt' "$CONFIG" \
   || fail "update detection must prefer the domestic GitHub Raw mirror"
 grep -q 'static let configurationURLs = \[' "$CONFIG" \
   || fail "update detection must retain multiple configuration sources"
@@ -89,7 +89,7 @@ grep -q 'Button("不再提示", role: .cancel)' "$MAP" \
   || fail "the third community prompt must allow permanent suppression"
 grep -q '匿名收录，不在 README 展示投稿账号' "$GITHUB_SUBMISSION" \
   || fail "the contribution template must offer anonymous README attribution"
-grep -Fq 'https://github.com/xweiba/location-spoofer/discussions/new?category=%E7%AC%AC%E4%B8%89%E6%96%B9%E9%85%8D%E7%BD%AE%E5%88%86%E4%BA%AB' "$GITHUB_SUBMISSION" \
+grep -Fq 'https://github.com/q459350062-star/location-spoofer/discussions/new?category=%E7%AC%AC%E4%B8%89%E6%96%B9%E9%85%8D%E7%BD%AE%E5%88%86%E4%BA%AB' "$GITHUB_SUBMISSION" \
   || fail "community submission must use one fixed Discussions address"
 grep -q 'UIPasteboard.general.string = GitHubSubmission.communityContributionTemplate' "$MAP" \
   || fail "the explicit copy action must copy the contribution template"
@@ -128,7 +128,7 @@ done
 grep -Fq 'label: 第三方客户端版本' "$DISCUSSION_FORM" \
   || fail "the Discussions form must clearly request the third-party client version"
 
-grep -Fq 'https://github.com/xweiba/location-spoofer/issues/new?template=bug-report.yml' "$GITHUB_SUBMISSION" \
+grep -Fq 'https://github.com/q459350062-star/location-spoofer/issues/new?template=bug-report.yml' "$GITHUB_SUBMISSION" \
   || fail "the App bug report must open the dedicated Issue form"
 grep -Fq 'GitHubSubmission.bugReportURL' "$BUG_REPORT" \
   || fail "the App bug report must use the shared GitHub destination"
