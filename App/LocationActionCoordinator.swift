@@ -75,7 +75,11 @@ final class LocationActionCoordinator: ObservableObject {
                 return false
             }
 
-            return commit(favorite)
+            let applied = commit(favorite)
+            if !applied && !wasRunning {
+                proxy.stop()
+            }
+            return applied
 
         } catch {
             if !wasRunning {
