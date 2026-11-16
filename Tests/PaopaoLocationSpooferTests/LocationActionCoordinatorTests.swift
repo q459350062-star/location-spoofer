@@ -17,6 +17,7 @@ final class LocationActionCoordinatorTests: XCTestCase {
 
         let applied = await coordinator.apply(favorite)
         XCTAssertTrue(applied)
+        XCTAssertEqual(coordinator.message, "虚拟定位配置已写入；系统定位尚未验证")
         XCTAssertTrue(proxy.isRunning)
         XCTAssertEqual(proxy.lastCoordinates?.latitude, favorite.coordinatePair.wgs84.latitude)
         XCTAssertEqual(proxy.lastCoordinates?.longitude, favorite.coordinatePair.wgs84.longitude)
