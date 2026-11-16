@@ -89,6 +89,15 @@ func isWlocHost(host string) bool {
 	return false
 }
 
+func isPatchableWlocPath(path string) bool {
+	switch path {
+	case "/clls/wloc", "/cn/ab.arpc":
+		return true
+	default:
+		return false
+	}
+}
+
 func newProxy(cert *tls.Certificate) *goproxy.ProxyHttpServer {
 	proxy := goproxy.NewProxyHttpServer()
 	proxy.Verbose = true
@@ -265,9 +274,9 @@ logEvent(fmt.Sprintf("WLOC response observed method=%s host=%s path=%s status=%d
     resp.ContentLength,
     resp.Header.Get("Content-Encoding")))
 
-if resp.Request.URL.Path != "/clls/wloc" || resp.Request.Method != http.MethodPost {
-    return resp
-}
+if !isPatchableWlocPath(resp.Request.URL.Path) || resp.Request.Method != http.MethodPost {
+		return resp
+	}
 
 	stateMu.Lock()
 	enabled, lat, lon, accuracy, motionEnabled := currentEnabled, currentLat, currentLon, currentAccuracy, currentMotionSimulationEnabled
