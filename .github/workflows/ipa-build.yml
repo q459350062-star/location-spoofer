@@ -16,6 +16,7 @@ on:
       - 'ThirdParty/wloc/**'
       - 'Config/**'
       - 'Scripts/**'
+      - 'Upstream/**'
       - 'Tests/**'
       - 'project.yml'
       - 'build.sh'
