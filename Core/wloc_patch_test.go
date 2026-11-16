@@ -329,6 +329,44 @@ func TestPatchWlocResponsePassesThroughOversizedBody(t *testing.T) {
 	}
 }
 
+func TestPatchWlocResponseSupportsARPCPath(t *testing.T) {
+	payload := writeLengthDelimited(2, testWifiDevice(testLocation(100, 200, 25)))
+	body, lengthOffset := testARPCFrame(payload, nil)
+	req := httptest.NewRequest(http.MethodPost, "https://gsp-ssl.ls.apple.com/cn/ab.arpc", nil)
+	resp := &http.Response{
+		StatusCode:    http.StatusOK,
+		Request:       req,
+		Header:        make(http.Header),
+		Body:          io.NopCloser(bytes.NewReader(body)),
+		ContentLength: int64(len(body)),
+	}
+
+	stateMu.Lock()
+	oldEnabled, oldLat, oldLon, oldAccuracy := currentEnabled, currentLat, currentLon, currentAccuracy
+	currentEnabled, currentLat, currentLon, currentAccuracy = true, 31.230416, 121.473701, 30
+	stateMu.Unlock()
+	t.Cleanup(func() {
+		stateMu.Lock()
+		currentEnabled, currentLat, currentLon, currentAccuracy = oldEnabled, oldLat, oldLon, oldAccuracy
+		stateMu.Unlock()
+	})
+
+	patched := patchWlocResponse(resp, nil)
+	got, err := io.ReadAll(patched.Body)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if bytes.Equal(got, body) {
+		t.Fatal("ARPC response was not patched")
+	}
+	newLength := int(binary.BigEndian.Uint32(got[lengthOffset : lengthOffset+4]))
+	newPayload := got[lengthOffset+4 : lengthOffset+4+newLength]
+	latBytes := append(writeTag(1, wireVarint), writeVarint(uint64(int64(math.Round(31.230416*1e8))))...)
+	if !bytes.Contains(newPayload, latBytes) {
+		t.Fatal("patched ARPC response does not contain the configured latitude")
+	}
+}
+
 func TestServeLocalRequestsKeepsUnrelatedRequestBodyStreaming(t *testing.T) {
 	const secret = "body-must-not-be-buffered-or-logged"
 	req := httptest.NewRequest(http.MethodPost, "https://example.com/upload", bytes.NewBufferString(secret))
