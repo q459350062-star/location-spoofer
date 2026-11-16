@@ -593,7 +593,7 @@ struct MapHomeView: View {
         switch spoofState {
         case .idle: return AppLocalization.string("开始虚拟定位")
         case .verifying: return AppLocalization.string("验证环境中…")
-        case .active: return AppLocalization.string("停止虚拟定位")
+        case .active: return AppLocalization.string("停止虚拟定位配置")
         }
     }
 
@@ -601,7 +601,8 @@ struct MapHomeView: View {
         switch spoofState {
         case .idle: return .blue
         case .verifying: return .gray
-        case .active: return .green
+        case .active:
+            return runtimeMode.mode == .localWiFi ? .orange : .green
         }
     }
 
@@ -693,9 +694,10 @@ struct MapHomeView: View {
                     lastSpoofDiagnosisSystem = nil
                     hasLoggedSpoofDiagnosis = false
                 }
-                RuntimeLogger.info("APP", "定位", "验证结果", details: [
-                    "success": "true",
-                    "applied": String(applied),
+                RuntimeLogger.info("APP", "定位", "代理环境验证通过，虚拟定位配置已写入", details: [
+                    "proxyVerification": "passed",
+                    "configurationSaved": String(applied),
+                    "systemLocationVerified": "false",
                     "spoofState": String(describing: spoofState)
                 ])
                 if applied {
