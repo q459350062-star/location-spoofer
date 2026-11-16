@@ -1,0 +1,18 @@
+# Xcode user and build data
+DerivedData/
+build/
+*.xcarchive
+*.ipa
+*.dSYM
+*.dSYM.zip
+xcuserdata/
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+
+# Go build outputs
+GoSpoofer/build/
+GoSpoofer/libgolocationspoofer.a
+
+# macOS
+.DS_Store

@@ -1,0 +1,609 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10D2C37DD39EBD5D5FF0B9E5 /* WLOCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F87AF12408C9EC3BCC35523 /* WLOCUITests.swift */; };
+		1A04C22E1E1EC6E2CCB005D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEAF28B284AD1B09B31D8A6D /* Assets.xcassets */; };
+		1F5D86027E90A6A952224EB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B38987E267320680FE41E7A /* ContentView.swift */; };
+		1FF8112D7A0C35BE96968E4F /* CertificateInstaller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C1ADE14A65AE2C71ABE767E /* CertificateInstaller.swift */; };
+		20848A8AF36B8134D55A89BD /* GoLocationSpoofer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BD0792E2F7DDD0E6FFCC53E /* GoLocationSpoofer.swift */; };
+		62000FD8416103A1F2288B23 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724FCDA51A989D7125279AF5 /* SettingsView.swift */; };
+		6F578155828FD71054FB1CDE /* CoordinateInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32ED2AC256381EA7646DD66 /* CoordinateInputView.swift */; };
+		7B0AC4A8ECB752C0AB5D97B7 /* FirstSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC25F3F43EA7C5FA9A9F481 /* FirstSetupView.swift */; };
+		8878BA53CFA76BD451FAAA04 /* LocationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF488ED77F57E5833801CAF /* LocationConfiguration.swift */; };
+		9D24AE00FB5F7D46B5EC75D2 /* location_spooferApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A948F6D9DC8C281EA1A1C898 /* location_spooferApp.swift */; };
+		A13FA6BB5ABB1EEAEED882AC /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7407D6C5703B262D8C8A125 /* NetworkExtension.framework */; };
+		AE465B31E1F481A6FB194632 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7069BC8F06D895D37CCBCA4D /* PacketTunnelProvider.swift */; };
+		B969BDDFD1BCC5FFE21FA246 /* WLOCUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC812F4CB41A02F77D295A5B /* WLOCUITestsLaunchTests.swift */; };
+		BC82BE131CB20E5B0504ACF0 /* WLOCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82EB24E55AFF893E0A4065B /* WLOCTests.swift */; };
+		C8C2D5D3B55C6A499DDE8BF8 /* MapHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21D8782FE940DA45E10ECD2 /* MapHomeView.swift */; };
+		CA3C0532CB81A69D043EF989 /* DiagLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D958DDC9B3F51F21C76D641 /* DiagLog.swift */; };
+		E1C2FB2908FDE7F22BDA0723 /* LocationConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75443FFC31395573C3737702 /* LocationConfiguration.swift */; };
+		E2B59A979CDAE2E106B8E995 /* WLOCTunnel.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 846E5B46ED432F58E60DC77F /* WLOCTunnel.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FBA542C20BCA7822BA19C021 /* SpoofingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2EA9BCAAC34A3D5F0F3A805 /* SpoofingState.swift */; };
+		FE3C95A22666B556D7DE28AB /* CoordinateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852E04813BBE4AEE0CD3FA7C /* CoordinateConverter.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7332DDFDEC9C1B1433DD3A20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D415D59299928AF5F067EA72 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62186870F4EB9E4F2BB99F38;
+			remoteInfo = WLOC;
+		};
+		AAF41C43F9B0CA226C5ACCDA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D415D59299928AF5F067EA72 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 62186870F4EB9E4F2BB99F38;
+			remoteInfo = WLOC;
+		};
+		ED80D621E56B0CF6ABD8C321 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D415D59299928AF5F067EA72 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4DEFE2549002D0846370CE07;
+			remoteInfo = WLOCTunnel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CEAE64696429D08E45CDAF04 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				E2B59A979CDAE2E106B8E995 /* WLOCTunnel.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		1992FADEFB6689692C7EFAEB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		1D8E35E3661BD2C05B7F2722 /* location-spoofer-tunnel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "location-spoofer-tunnel.entitlements"; sourceTree = "<group>"; };
+		2B38987E267320680FE41E7A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5BD0792E2F7DDD0E6FFCC53E /* GoLocationSpoofer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoLocationSpoofer.swift; sourceTree = "<group>"; };
+		5F87AF12408C9EC3BCC35523 /* WLOCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WLOCUITests.swift; sourceTree = "<group>"; };
+		6B2D3D0C43635DC33D62DED1 /* golocationspoofer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = golocationspoofer.h; sourceTree = "<group>"; };
+		6EF488ED77F57E5833801CAF /* LocationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationConfiguration.swift; sourceTree = "<group>"; };
+		7069BC8F06D895D37CCBCA4D /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		7184ABB0A8371D133D9434FC /* location-spoofer-tunnel-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "location-spoofer-tunnel-Bridging-Header.h"; sourceTree = "<group>"; };
+		724FCDA51A989D7125279AF5 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		75443FFC31395573C3737702 /* LocationConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationConfiguration.swift; sourceTree = "<group>"; };
+		846E5B46ED432F58E60DC77F /* WLOCTunnel.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = WLOCTunnel.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		852E04813BBE4AEE0CD3FA7C /* CoordinateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateConverter.swift; sourceTree = "<group>"; };
+		85F539BB608C8601C73F787D /* location-spoofer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "location-spoofer.entitlements"; sourceTree = "<group>"; };
+		8BC25F3F43EA7C5FA9A9F481 /* FirstSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstSetupView.swift; sourceTree = "<group>"; };
+		8C1ADE14A65AE2C71ABE767E /* CertificateInstaller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CertificateInstaller.swift; sourceTree = "<group>"; };
+		8D958DDC9B3F51F21C76D641 /* DiagLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagLog.swift; sourceTree = "<group>"; };
+		A026B2D03C5AD84C7D5A9CA4 /* WLOCUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = text; name = WLOCUITests.xctest; path = .xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A948F6D9DC8C281EA1A1C898 /* location_spooferApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = location_spooferApp.swift; sourceTree = "<group>"; };
+		B21D8782FE940DA45E10ECD2 /* MapHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapHomeView.swift; sourceTree = "<group>"; };
+		B2EA9BCAAC34A3D5F0F3A805 /* SpoofingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpoofingState.swift; sourceTree = "<group>"; };
+		B32ED2AC256381EA7646DD66 /* CoordinateInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinateInputView.swift; sourceTree = "<group>"; };
+		B55894DC6224197CFAAE0306 /* libgolocationspoofer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libgolocationspoofer.h; sourceTree = "<group>"; };
+		B7407D6C5703B262D8C8A125 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		BC812F4CB41A02F77D295A5B /* WLOCUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WLOCUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		CF106B38352DD962EDC21D4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		E82EB24E55AFF893E0A4065B /* WLOCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WLOCTests.swift; sourceTree = "<group>"; };
+		E8BD00D7A4708E1E1F639731 /* WLOC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WLOC.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		EEAF28B284AD1B09B31D8A6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FE885613A7EB9B14F85F2B7A /* WLOCTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = text; name = WLOCTests.xctest; path = .xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		88E1344878E0351AC7118C51 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A13FA6BB5ABB1EEAEED882AC /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		033DC0055EE5C0591CB7A99E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E8BD00D7A4708E1E1F639731 /* WLOC.app */,
+				FE885613A7EB9B14F85F2B7A /* WLOCTests.xctest */,
+				846E5B46ED432F58E60DC77F /* WLOCTunnel.appex */,
+				A026B2D03C5AD84C7D5A9CA4 /* WLOCUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0772E8AAA716C9CD28B77B66 /* GoSpoofer */ = {
+			isa = PBXGroup;
+			children = (
+				6B2D3D0C43635DC33D62DED1 /* golocationspoofer.h */,
+				B55894DC6224197CFAAE0306 /* libgolocationspoofer.h */,
+			);
+			path = GoSpoofer;
+			sourceTree = "<group>";
+		};
+		245FC68F5E4AE46083DFD992 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				8C1ADE14A65AE2C71ABE767E /* CertificateInstaller.swift */,
+				2B38987E267320680FE41E7A /* ContentView.swift */,
+				852E04813BBE4AEE0CD3FA7C /* CoordinateConverter.swift */,
+				B32ED2AC256381EA7646DD66 /* CoordinateInputView.swift */,
+				8D958DDC9B3F51F21C76D641 /* DiagLog.swift */,
+				8BC25F3F43EA7C5FA9A9F481 /* FirstSetupView.swift */,
+				A948F6D9DC8C281EA1A1C898 /* location_spooferApp.swift */,
+				75443FFC31395573C3737702 /* LocationConfiguration.swift */,
+				B21D8782FE940DA45E10ECD2 /* MapHomeView.swift */,
+				724FCDA51A989D7125279AF5 /* SettingsView.swift */,
+				B2EA9BCAAC34A3D5F0F3A805 /* SpoofingState.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		336659D9B77D01121C13BA0C /* WLOCUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5F87AF12408C9EC3BCC35523 /* WLOCUITests.swift */,
+				BC812F4CB41A02F77D295A5B /* WLOCUITestsLaunchTests.swift */,
+			);
+			path = WLOCUITests;
+			sourceTree = "<group>";
+		};
+		3922554D5D90B33329CF0B43 /* WLOCTests */ = {
+			isa = PBXGroup;
+			children = (
+				E82EB24E55AFF893E0A4065B /* WLOCTests.swift */,
+			);
+			path = WLOCTests;
+			sourceTree = "<group>";
+		};
+		3F695929042C8280BA747C93 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EEAF28B284AD1B09B31D8A6D /* Assets.xcassets */,
+				1992FADEFB6689692C7EFAEB /* Info.plist */,
+				85F539BB608C8601C73F787D /* location-spoofer.entitlements */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6FE5FA96BC63D69EEC57100A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B7407D6C5703B262D8C8A125 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		80BD59DF0AE0A1E7FA5E59CC /* Tunnel */ = {
+			isa = PBXGroup;
+			children = (
+				5BD0792E2F7DDD0E6FFCC53E /* GoLocationSpoofer.swift */,
+				CF106B38352DD962EDC21D4C /* Info.plist */,
+				7184ABB0A8371D133D9434FC /* location-spoofer-tunnel-Bridging-Header.h */,
+				1D8E35E3661BD2C05B7F2722 /* location-spoofer-tunnel.entitlements */,
+				6EF488ED77F57E5833801CAF /* LocationConfiguration.swift */,
+				7069BC8F06D895D37CCBCA4D /* PacketTunnelProvider.swift */,
+			);
+			path = Tunnel;
+			sourceTree = "<group>";
+		};
+		EB93745276A93EBA27ED1DEF = {
+			isa = PBXGroup;
+			children = (
+				245FC68F5E4AE46083DFD992 /* App */,
+				0772E8AAA716C9CD28B77B66 /* GoSpoofer */,
+				3F695929042C8280BA747C93 /* Resources */,
+				80BD59DF0AE0A1E7FA5E59CC /* Tunnel */,
+				3922554D5D90B33329CF0B43 /* WLOCTests */,
+				336659D9B77D01121C13BA0C /* WLOCUITests */,
+				6FE5FA96BC63D69EEC57100A /* Frameworks */,
+				033DC0055EE5C0591CB7A99E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0600707400DDF2AAFC4B44B8 /* WLOCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41AE22B163EC5FBB6E03CBB2 /* Build configuration list for PBXNativeTarget "WLOCTests" */;
+			buildPhases = (
+				9179E88FF675EED2B32A8076 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3127F9E3639F8FBB5D5C9409 /* PBXTargetDependency */,
+			);
+			name = WLOCTests;
+			packageProductDependencies = (
+			);
+			productName = WLOCTests;
+			productReference = FE885613A7EB9B14F85F2B7A /* WLOCTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4DEFE2549002D0846370CE07 /* WLOCTunnel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 76BE4359761369BA05C936AA /* Build configuration list for PBXNativeTarget "WLOCTunnel" */;
+			buildPhases = (
+				123C6E1AE64FA402C4D8F584 /* Sources */,
+				88E1344878E0351AC7118C51 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WLOCTunnel;
+			packageProductDependencies = (
+			);
+			productName = WLOCTunnel;
+			productReference = 846E5B46ED432F58E60DC77F /* WLOCTunnel.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		581A959B7546B3ECDF03B326 /* WLOCUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4A8C1BEEC077E74CA60F602A /* Build configuration list for PBXNativeTarget "WLOCUITests" */;
+			buildPhases = (
+				BF46DE45BA997A537DD1F946 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C384F7E55256FA044A3D5F58 /* PBXTargetDependency */,
+			);
+			name = WLOCUITests;
+			packageProductDependencies = (
+			);
+			productName = WLOCUITests;
+			productReference = A026B2D03C5AD84C7D5A9CA4 /* WLOCUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		62186870F4EB9E4F2BB99F38 /* WLOC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EF4069E64EEF3CC41EADF935 /* Build configuration list for PBXNativeTarget "WLOC" */;
+			buildPhases = (
+				8C87870ED58958684EA5AAF1 /* Sources */,
+				E5EBEC0ECFC460D8C14EE567 /* Resources */,
+				CEAE64696429D08E45CDAF04 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				35A4BB915BEB30290ED1E7E7 /* PBXTargetDependency */,
+			);
+			name = WLOC;
+			packageProductDependencies = (
+			);
+			productName = WLOC;
+			productReference = E8BD00D7A4708E1E1F639731 /* WLOC.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D415D59299928AF5F067EA72 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					4DEFE2549002D0846370CE07 = {
+						ProvisioningStyle = Automatic;
+					};
+					581A959B7546B3ECDF03B326 = {
+						TestTargetID = 62186870F4EB9E4F2BB99F38;
+					};
+					62186870F4EB9E4F2BB99F38 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1F46C2ACBC44CDB8C6567F33 /* Build configuration list for PBXProject "WLOC" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = EB93745276A93EBA27ED1DEF;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 033DC0055EE5C0591CB7A99E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				62186870F4EB9E4F2BB99F38 /* WLOC */,
+				4DEFE2549002D0846370CE07 /* WLOCTunnel */,
+				0600707400DDF2AAFC4B44B8 /* WLOCTests */,
+				581A959B7546B3ECDF03B326 /* WLOCUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E5EBEC0ECFC460D8C14EE567 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1A04C22E1E1EC6E2CCB005D7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		123C6E1AE64FA402C4D8F584 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20848A8AF36B8134D55A89BD /* GoLocationSpoofer.swift in Sources */,
+				8878BA53CFA76BD451FAAA04 /* LocationConfiguration.swift in Sources */,
+				AE465B31E1F481A6FB194632 /* PacketTunnelProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C87870ED58958684EA5AAF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1FF8112D7A0C35BE96968E4F /* CertificateInstaller.swift in Sources */,
+				1F5D86027E90A6A952224EB7 /* ContentView.swift in Sources */,
+				FE3C95A22666B556D7DE28AB /* CoordinateConverter.swift in Sources */,
+				6F578155828FD71054FB1CDE /* CoordinateInputView.swift in Sources */,
+				CA3C0532CB81A69D043EF989 /* DiagLog.swift in Sources */,
+				7B0AC4A8ECB752C0AB5D97B7 /* FirstSetupView.swift in Sources */,
+				E1C2FB2908FDE7F22BDA0723 /* LocationConfiguration.swift in Sources */,
+				C8C2D5D3B55C6A499DDE8BF8 /* MapHomeView.swift in Sources */,
+				62000FD8416103A1F2288B23 /* SettingsView.swift in Sources */,
+				FBA542C20BCA7822BA19C021 /* SpoofingState.swift in Sources */,
+				9D24AE00FB5F7D46B5EC75D2 /* location_spooferApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9179E88FF675EED2B32A8076 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC82BE131CB20E5B0504ACF0 /* WLOCTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BF46DE45BA997A537DD1F946 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10D2C37DD39EBD5D5FF0B9E5 /* WLOCUITests.swift in Sources */,
+				B969BDDFD1BCC5FFE21FA246 /* WLOCUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3127F9E3639F8FBB5D5C9409 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62186870F4EB9E4F2BB99F38 /* WLOC */;
+			targetProxy = AAF41C43F9B0CA226C5ACCDA /* PBXContainerItemProxy */;
+		};
+		35A4BB915BEB30290ED1E7E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4DEFE2549002D0846370CE07 /* WLOCTunnel */;
+			targetProxy = ED80D621E56B0CF6ABD8C321 /* PBXContainerItemProxy */;
+		};
+		C384F7E55256FA044A3D5F58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 62186870F4EB9E4F2BB99F38 /* WLOC */;
+			targetProxy = 7332DDFDEC9C1B1433DD3A20 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		165EF33E4E59E60F7DF93055 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Resources/location-spoofer.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5N66S29EK2;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = wloc;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.WLOC;
+				PRODUCT_NAME = WLOC;
+			};
+			name = Release;
+		};
+		5036F30D867B12862B3693AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.WLOCTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WLOC.app/WLOC";
+			};
+			name = Release;
+		};
+		5804B67D62E61E0BC162F201 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0.0;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		68EBDBA2D01FD55C025A8891 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.WLOCUITests;
+				TEST_TARGET_NAME = WLOC;
+			};
+			name = Debug;
+		};
+		7158E82D600F8D173910A362 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.WLOCUITests;
+				TEST_TARGET_NAME = WLOC;
+			};
+			name = Release;
+		};
+		8266FF21FCC4D0438B51BE2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CURRENT_PROJECT_VERSION = 1;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MARKETING_VERSION = 1.0.0;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		A56F5A773D109F14DF9D2B60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.WLOCTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WLOC.app/WLOC";
+			};
+			name = Debug;
+		};
+		D123FF345769A12D830F638E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Tunnel/location-spoofer-tunnel.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5N66S29EK2;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/GoSpoofer";
+				INFOPLIST_FILE = Tunnel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/GoSpoofer/build";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lgolocationspoofer",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.WLOC.tunnel;
+				PRODUCT_NAME = WLOCTunnel;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Tunnel/location-spoofer-tunnel-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		DF614AC1A302B844FEDE942E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Resources/location-spoofer.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5N66S29EK2;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = wloc;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.WLOC;
+				PRODUCT_NAME = WLOC;
+			};
+			name = Debug;
+		};
+		E79F864011C8263E64889F4E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Tunnel/location-spoofer-tunnel.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 5N66S29EK2;
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/GoSpoofer";
+				INFOPLIST_FILE = Tunnel/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/GoSpoofer/build";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-lgolocationspoofer",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = fudan.miniS.WLOC.tunnel;
+				PRODUCT_NAME = WLOCTunnel;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "Tunnel/location-spoofer-tunnel-Bridging-Header.h";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1F46C2ACBC44CDB8C6567F33 /* Build configuration list for PBXProject "WLOC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5804B67D62E61E0BC162F201 /* Debug */,
+				8266FF21FCC4D0438B51BE2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		41AE22B163EC5FBB6E03CBB2 /* Build configuration list for PBXNativeTarget "WLOCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A56F5A773D109F14DF9D2B60 /* Debug */,
+				5036F30D867B12862B3693AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4A8C1BEEC077E74CA60F602A /* Build configuration list for PBXNativeTarget "WLOCUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				68EBDBA2D01FD55C025A8891 /* Debug */,
+				7158E82D600F8D173910A362 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		76BE4359761369BA05C936AA /* Build configuration list for PBXNativeTarget "WLOCTunnel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E79F864011C8263E64889F4E /* Debug */,
+				D123FF345769A12D830F638E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EF4069E64EEF3CC41EADF935 /* Build configuration list for PBXNativeTarget "WLOC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DF614AC1A302B844FEDE942E /* Debug */,
+				165EF33E4E59E60F7DF93055 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D415D59299928AF5F067EA72 /* Project object */;
+}
