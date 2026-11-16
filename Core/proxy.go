@@ -166,8 +166,11 @@ func newProxy(cert *tls.Certificate) *goproxy.ProxyHttpServer {
 		}
 		proxy.OnRequest().HandleConnectFunc(func(host string, ctx *goproxy.ProxyCtx) (*goproxy.ConnectAction, string) {
 			if isWlocHost(host) {
-				logEvent("CONNECT " + host + " -> MITM")
-				return mitmAction, host
+				// Preserve native Apple location TLS. System location services may
+				// reject user-installed interception CAs even when ordinary apps trust them.
+				// This intentionally disables WLOC response rewriting for these hosts.
+				logEvent("CONNECT " + host + " -> passthrough (Apple location TLS interception disabled)")
+				return goproxy.OkConnect, host
 			}
 			// Diagnostic only: record Apple domains outside the WLOC allowlist.
 			// Do not MITM these hosts; this distinguishes an unlisted endpoint
