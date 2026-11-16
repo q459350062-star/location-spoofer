@@ -189,7 +189,7 @@ final class LocationActionCoordinator: ObservableObject {
 
         state = .idle
         virtualLocationEnabled = true
-        message = "虚拟定位已开启"
+        message = "虚拟定位配置已写入；系统定位尚未验证"
 
         return true
     }
